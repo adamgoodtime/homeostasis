@@ -1,10 +1,16 @@
 import numpy as np
 
-def times_to_spikes(times, duration):
+def times_to_spikes(times, duration, stack_bias=0):
     spikes = np.zeros([len(times), duration])
     for n, neuron in enumerate(times):
         for t in neuron:
             spikes[n][int(t)] = 1
+    if stack_bias:
+        bias = np.zeros(duration)
+        for t in range(duration):
+            if np.random.random() < (stack_bias / 1000):
+                bias[t] = 1
+        spikes = np.vstack([spikes, bias])
     return spikes
 
 def build_input_spike_train(num_repeats, cycle_time, pop_size, use_50=False):

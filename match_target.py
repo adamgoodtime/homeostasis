@@ -18,7 +18,7 @@ for i in range(1024):
                     + 2 * np.sin((4 * i * 2 * np.pi / 1024))
                 )
 
-input_size = 100
+input_size = 100+1
 hidden_size = [100, 100, 100]
 output_size = 1
 
@@ -32,7 +32,7 @@ spike_times = build_input_spike_train(num_repeats=1,
                                        cycle_time=duration,
                                        pop_size=100,
                                        use_50=True)
-input_spikes = times_to_spikes(spike_times, duration)
+input_spikes = times_to_spikes(spike_times, duration, stack_bias=50)
 
 all_outputs = []
 epoch_error = []
